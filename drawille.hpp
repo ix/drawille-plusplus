@@ -3,21 +3,19 @@
 
 #include <vector>
 #include <ostream>
-#include <unicode/ustream.h>
-#include <unicode/unistr.h>
 
 namespace Drawille {
   using std::vector;
-  using std::ostream;
+  using std::wostream;
 
-  const size_t pixmap[4][2] = {
+  constexpr size_t pixmap[4][2] = {
     {0x01, 0x08},
     {0x02, 0x10},
     {0x04, 0x20},
     {0x40, 0x80}
   };
 
-  const size_t braille = 0x2800;
+  constexpr wchar_t braille = 0x2800;
 
   class Canvas {
   public:
@@ -39,18 +37,18 @@ namespace Drawille {
       this->canvas[y / 4][x / 2] &= ~pixmap[y % 4][x % 2];
     }
 
-    void draw(ostream& strm) {
+    void draw(wostream& strm) {
       for(auto& v: this->canvas) {
         for(auto& c: v) {
           if(c == 0) strm << " ";
-          else strm << UnicodeString((UChar32)(braille+c));
+          else strm << std::wstring{braille+c};
         }
         strm << std::endl;
       }
     }
 
   protected:
-    vector<vector<size_t>> canvas;
+    vector<vector<wchar_t>> canvas;
   };
 }
 
