@@ -3,9 +3,9 @@ drawille-plusplus
 
 An implementation of [drawille](https://github.com/asciimoo/drawille) in C++.
 
-Currently depends on the ICU library for unicode support.
+Do not forget to set your locale with `std::locale::global(std::locale(""));` at the beginning of your program to enable wide-character support.
 
-Header-only, to use in your project simply include `drawille.hpp` and compile with `-licuuc -licuio`.
+Header-only, to use in your project simply include `drawille.hpp` and compile with C++11 support or later.
 
 I may write more examples at a later date, or you are free to contribute some via pull request.
 
